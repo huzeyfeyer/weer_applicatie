@@ -14,25 +14,28 @@
             <li><a href="Maand.html">Maand Overzicht</a></li>
         </ul>
     </nav>
-<body>
+
     <header>
         <h1>Weer Applicatie</h1>
     </header>
     <main>
          <!-- Mijn locatie functionaliteit -->
-          <div>
-            <section id="bediening">
-                <input type="date" id="datumKiezer">
-                <input type="text" id="locatieInvoer" placeholder="Voer locatie in">
-                <button id="gebruikLocatieKnop">Gebruik mijn locatie</button>
-                <button id="toonWeerKnop">Toon Weer</button>
-          </div>
+ <section id="bediening" class="content-section">
+        <label for="provincieSelect">Kies een provincie:</label>
+        <select id="provincieSelect">
+            <option value="">-- Geen provincie gekozen --</option>
+            <option value="antwerpen">Antwerpen</option>
+            <option value="limburg">Limburg</option>
+            <option value="oostvlaanderen">Oost-Vlaanderen</option>
+            <option value="westvlaanderen">West-Vlaanderen</option>
+            <option value="vlaamsbrabant">Vlaams-Brabant</option>
+        </select>
 
-        <div>
-            <label for="datumKiezer">Kies een datum:</label>
-            <input type="date" id="datumKiezer">
-            <button id="toonWeerKnop">Toon Weer</button>
-        </div>
+        <label for="datumKiezer">Kies een datum:</label>
+        <input type="date" id="datumKiezer">
+
+        <button id="gebruikLocatieBtn">Gebruik mijn locatie</button>
+        <button id="toonWeerKnop">Toon Weer</button>
     </section>
 
     <section id="weerKaarten"  class="content-section">
@@ -52,6 +55,7 @@
       <footer>
         <p>&copy; 2025 Aquafin - Weer Applicatie | Alle rechten voorbehouden</p>
     </footer>
-    <script src="script.js"></script>
+    <script src="js/provincies.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
