@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="../CSS/global.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-  <!-- Navigatie webapplicatie-->
+<body>
+    <!-- Navigatie webapplicatie -->
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -18,44 +19,49 @@
     <header>
         <h1>Weer Applicatie</h1>
     </header>
+
     <main>
-         <!-- Mijn locatie functionaliteit -->
- <section id="bediening" class="content-section">
-        <label for="provincieSelect">Kies een provincie:</label>
-        <select id="provincieSelect">
-            <option value="">-- Geen provincie gekozen --</option>
-            <option value="antwerpen">Antwerpen</option>
-            <option value="limburg">Limburg</option>
-            <option value="oostvlaanderen">Oost-Vlaanderen</option>
-            <option value="westvlaanderen">West-Vlaanderen</option>
-            <option value="vlaamsbrabant">Vlaams-Brabant</option>
-        </select>
+        <!-- Toegevoegd: waarschuwing bovenaan -->
+        <section id="work-advisory" class="content-section" style="display: none;"></section>
 
-        <label for="datumKiezer">Kies een datum:</label>
-        <input type="date" id="datumKiezer">
+        <!-- Mijn locatie functionaliteit -->
+        <section id="bediening" class="content-section">
+            <label for="provincieSelect">Kies een provincie:</label>
+            <select id="provincieSelect">
+                <option value="">-- Geen provincie gekozen --</option>
+                <option value="antwerpen" data-lat="51.2194" data-lon="4.4025">Antwerpen</option>
+                <option value="limburg" data-lat="50.9307" data-lon="5.3378">Limburg</option>
+                <option value="oostvlaanderen" data-lat="51.0362" data-lon="3.7373">Oost-Vlaanderen</option>
+                <option value="westvlaanderen" data-lat="51.0560" data-lon="3.7160">West-Vlaanderen</option>
+                <option value="vlaamsbrabant" data-lat="50.8800" data-lon="4.7170">Vlaams-Brabant</option>
+            </select>
 
-        <button id="gebruikLocatieBtn">Gebruik mijn locatie</button>
-        <button id="toonWeerKnop">Toon Weer</button>
-    </section>
+            <label for="datumKiezer">Kies een datum:</label>
+            <input type="date" id="datumKiezer">
 
-    <section id="weerKaarten"  class="content-section">
-        <h2>Weer per uur</h2>
-        <div id="hourly-weather-container">
-             <!-- hier komen de weerkaarten -->
-        </div>
-    </section>
-    <!-- hier komt de neerslaggrafiek -->
-    <section id="neerslagGrafiekSectie">
-        <h2>30-dagen Neerslaggrafiek</h2>
-        <canvas id="neerslagGrafiek"></canvas>
-    </section>
+            <button id="gebruikLocatieBtn">Gebruik mijn locatie</button>
+            <button id="toonWeerKnop">Toon Weer</button>
+        </section>
 
+        <section id="weerKaarten" class="content-section">
+            <h2>Weer per uur</h2>
+            <div id="hourly-weather-container">
+                <!-- hier komen de weerkaarten -->
+            </div>
+        </section>
+
+        <section id="neerslagGrafiekSectie" class="content-section">
+            <h2>30-dagen Neerslaggrafiek</h2>
+            <canvas id="neerslagGrafiek"></canvas>
+        </section>
     </main>
-      <!-- Footer webapplicatie-->
-      <footer>
+
+    <!-- Footer webapplicatie -->
+    <footer>
         <p>&copy; 2025 Aquafin - Weer Applicatie | Alle rechten voorbehouden</p>
     </footer>
-    <script src="js/provincies.js"></script>
-    <script src="js/index.js"></script>
+
+    <!-- Scripts -->
+    <script src="../Js/index.js"></script>
 </body>
 </html>
