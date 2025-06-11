@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Weer Applicatie</title>
+    <link rel="stylesheet" href="global.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Weer Applicatie</h1>
+    </header>
+    <main>
+         <!-- Mijn locatie functionaliteit -->
+        <section id="bediening">
+        <input type="date" id="datumKiezer">
+        <input type="text" id="locatieInvoer" placeholder="Voer locatie in">
+        <button id="gebruikLocatieKnop">Gebruik mijn locatie</button>
+        <button id="toonWeerKnop">Toon Weer</button>
+    </section>
+
+    <section id="weerKaarten">
+        <!-- hier komen de weerkaarten -->
+    </section>
+    <!-- hier komt de neerslaggrafiek -->
+    <section id="neerslagGrafiekSectie">
+        <h2>30-dagen Neerslaggrafiek</h2>
+        <canvas id="neerslagGrafiek"></canvas>
+    </section>
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
