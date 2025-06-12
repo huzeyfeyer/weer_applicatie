@@ -13,6 +13,10 @@ const bodyElement = document.body;
 let weatherChart = null;
 let weatherData = null;
 
+ // Vul datum automatisch in met vandaag
+datePicker.value = new Date().toISOString().split("T")[0];
+
+
 // seizoen drempels
 const seasonalThresholds = {
     winter: 300,
@@ -41,5 +45,24 @@ function getWeatherInfo(code) {
     };
     return map[code] || { icon: "wi-na", bg: "default.jpg" };
 }
-//achtergrond en icoon worden aangepast
+
+ //Gebruik huidige locatie
+  geoButton.addEventListener("click", () => {
+    navigator.geolocation?.getCurrentPosition(
+      pos => fetchWeatherData(pos.coords.latitude, pos.coords.longitude),
+      () => alert("Locatie niet beschikbaar.")
+    );
+  });
+
+  // Toon weer op basis van provincie
+  toonWeerKnop.addEventListener("click", () => {
+    const option = locationSelector.selectedOptions[0];
+    const datum = datePicker.value;
+    if (!option?.dataset.lat || !datum) {
+      alert("Kies een provincie en datum.");
+      return;
+    }
+    fetchWeatherData(option.dataset.lat, option.dataset.lon);
+  });
+
 }); 
