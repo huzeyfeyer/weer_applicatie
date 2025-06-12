@@ -46,6 +46,25 @@ function getWeatherInfo(code) {
     return map[code] || { icon: "wi-na", bg: "default.jpg" };
 }
 
+  // Weerdata ophalen  van API
+  async function fetchWeatherData(lat, lon) {
+    const datum = datePicker.value;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,precipitation,weathercode,windspeed_10m&current_weather=true&past_days=30&timezone=Europe/Brussels`;
+      const res = await fetch(url);
+      weatherData = await res.json();
+
+      const current = {
+        temperature: weatherData.current_weather.temperature,
+        windspeed: weatherData.current_weather.windspeed,
+        weathercode: weatherData.current_weather.weathercode,
+        precipitation: weatherData.hourly.precipitation[
+          weatherData.hourly.time.indexOf(weatherData.current_weather.time)
+        ]
+      };
+
+      updateWorkAdvisory(current);
+      displayHourlyData(datum);
+  }
  //Gebruik huidige locatie
   geoButton.addEventListener("click", () => {
     navigator.geolocation?.getCurrentPosition(
