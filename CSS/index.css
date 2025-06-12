@@ -1,0 +1,75 @@
+/* Bedieningspaneel voor zoeken*/
+#bediening {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+#bediening input[type="date"],
+#bediening select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+#bediening button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+#bediening button:hover {
+    background-color: #0056b3;
+}
+
+/* Uurlijkse weerkaarten panel */
+#hourly-weather-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 10px 0;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.weather-card {
+    flex: 0 0 auto;
+    width: 130px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.weather-card i {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.weather-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.weather-card p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+/* Neerslaggrafiek */
+#neerslagGrafiekSectie {
+    margin-top: 40px;
+    text-align: center;
+}
+

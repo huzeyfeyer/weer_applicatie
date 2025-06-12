@@ -77,69 +77,76 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     // advies tonen op basis van neerslag
-    function updateWorkAdvisory(current) {
-        let code = "green", title = "", advice = "";
+   function updateWorkAdvisory(current) {
+    let code = "green", title = "", advice = "", link = "";
 
-        if (current.precipitation > 10) {
-            code = "red";
-            title = "Zware neerslag – controleer installaties.";
-            advice = "Mogelijke overbelasting riolering.";
-        } else if (current.precipitation > 5) {
-            code = "yellow";
-            title = "Aanhoudende regen.";
-            advice = "Graafwerken kunnen hinder ondervinden.";
-        } else if (current.precipitation < 0.1) {
-            code = "orange";
-            title = "Droogte – Let op irrigatie.";
-            advice = "Pas beleid aan op droge omstandigheden.";
-        } else {
-            advisoryPanel.style.display = "none";
-            return;
-        }
-
-        advisoryPanel.className = `content-section code-${code}`;
-        advisoryPanel.innerHTML = `<h3>${title}</h3><p>${advice}</p>`;
-        advisoryPanel.style.display = "block";
+    if (current.precipitation > 10) {
+        code = "red";
+        title = "Zware neerslag verwacht !";
+        advice = "Mogelijke overbelasting riolering.";
+        link = "⚠️ Raadpleeg de <a href='overstroming.html#overstroming'>veiligheidsrichtlijnen voor technici</a> bij overstroming.";
+    } else if (current.precipitation > 5) {
+        code = "yellow";
+        title = "Aanhoudende regen.";
+        advice = "Graafwerken kunnen hinder ondervinden.";
+        link = "";
+    } else if (current.precipitation < 0.1) {
+        code = "orange";
+        title = "Let op Droogte!";
+        advice = "Pas beleid aan op droge omstandigheden.";
+        link = "ℹ️ Bekijk de <a href='droogte.html#droogte'>praktische droogteprocedures voor veldmedewerkers</a>.";
+    } else {
+        advisoryPanel.style.display = "none";
+        return;
     }
+
+    advisoryPanel.className = `content-section code-${code}`;
+    advisoryPanel.innerHTML = `
+        <h3>${title}</h3>
+        <p>${advice}</p>
+        ${link ? `<p class="advies-link">${link}</p>` : ""}
+    `;
+    advisoryPanel.style.display = "block";
+}
 
     // neerslaggrafiek tekenen
-    function displayPrecipitationChart() {
-        const daily = {};
+   function displayPrecipitationChart() {
+    const daily = {};
 
-        weatherData.hourly.time.forEach((t, i) => {
-            const d = t.split("T")[0];
-            daily[d] = (daily[d] || 0) + weatherData.hourly.precipitation[i];
-        });
+    weatherData.hourly.time.forEach((t, i) => {
+        const d = t.split("T")[0];
+        daily[d] = (daily[d] || 0) + weatherData.hourly.precipitation[i];
+    });
 
-        const labels = Object.keys(daily);
-        const data = Object.values(daily);
-        const month = new Date(labels[0]).getMonth() + 1;
-        const season = getSeason(month);
-        const threshold = seasonalThresholds[season] || 250;
+    const labels = Object.keys(daily);
+    const data = Object.values(daily);
+    const month = new Date(labels[0]).getMonth() + 1;
+    const season = getSeason(month);
+    const threshold = seasonalThresholds[season] || 250;
 
-        const flood = Array(labels.length).fill(threshold);
-        const drought = Array(labels.length).fill(2);
+    const flood = Array(labels.length).fill(threshold);
+    const drought = Array(labels.length).fill(2);
 
-        if (weatherChart) weatherChart.destroy();
+    if (weatherChart) weatherChart.destroy();
 
-        weatherChart = new Chart(ctx, {
-            type: "line",
-            data: {
-                labels,
-                datasets: [
-                    { label: "Neerslag (mm)", data, borderColor: "blue", backgroundColor: "rgba(0,0,255,0.1)", fill: true },
-                    { label: `Overstroming (${threshold} mm)`, data: flood, borderColor: "red", borderDash: [5, 5], fill: false },
-                    { label: "Droogte (2 mm)", data: drought, borderColor: "orange", borderDash: [5, 5], fill: false }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: { beginAtZero: true }
-                }
+    weatherChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels,
+            datasets: [
+                { label: "Neerslag (mm)", data, borderColor: "blue", backgroundColor: "rgba(0,0,255,0.1)", fill: true },
+                { label: `Overstroming (${threshold} mm)`, data: flood, borderColor: "red", borderDash: [5, 5], fill: false },
+                { label: "Droogte (2 mm)", data: drought, borderColor: "orange", borderDash: [5, 5], fill: false }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
             }
-        });
-    }
+        }
+    });
+}
 
     // Weerdata ophalen van API + foutcontrole
     async function fetchWeatherData(lat, lon, naam = "") {
