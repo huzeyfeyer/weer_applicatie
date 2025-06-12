@@ -16,6 +16,34 @@ let weatherData = null;
  // Vul datum automatisch in met vandaag
 datePicker.value = new Date().toISOString().split("T")[0];
 
+//weer per uur laten verschijnen
+function displayHourlyData(date) {
+    hourlyContainer.innerHTML = "";
+    if (!weatherData) return;
+
+    const { time, temperature_2m, precipitation } = weatherData.hourly;
+
+    time.forEach((t, i) => {
+      const [d, h] = t.split("T");
+      const hour = new Date(t).getHours();
+      if (d === date && hour >= 6 && hour <= 22) {
+        const temp = temperature_2m[i].toFixed(1);
+        const prec = precipitation[i].toFixed(1);
+        let risk = "Normaal", cls = "";
+
+        if (prec > 5) [risk, cls] = ["Overstroming", "text-danger"];
+        else if (prec < 0.1) [risk, cls] = ["Droogte", "text-warning"];
+
+        hourlyContainer.innerHTML += `
+          <div class="weather-card">
+            <h4>${hour}:00</h4>
+            <p>${temp}°C</p>
+            <p>${prec} mm</p>
+            <p class="${cls}">${risk}</p>
+          </div>`;
+      }
+    });
+  }
 
 // seizoen drempels
 const seasonalThresholds = {

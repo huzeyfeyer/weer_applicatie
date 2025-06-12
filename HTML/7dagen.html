@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>7 dagen</title>
     <link rel="stylesheet" href="/CSS/global.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="Js/7dagen.js"></script>
 </head>
 <body>
     <nav>
@@ -16,21 +18,18 @@
     </nav>
 
     <h1>7 Dagen Weer</h1>
-    <p>Hier komt de 7 dagen weersvoorspelling.</p>
-    <div class="search-container">
-        <label for="zoekInput">Zoek naar een locatie:</label>
-        <input type="text">
-        <button id="zoekButton">Zoeken</button>
-    </div>
-    <div class="card-container">
-        <div class="card">
-            <h2>Maandag</h2>
-            <p>Temperatuur: 20°C</p>
-            <p>Min: 13°C</p>
-            <p>Max: 25°C</p>
-            <p>Neerslag: 3mm</p>
-        </div>
+    <div class="options" role="list" aria-label="Beschikbare steden">
+        <button type="button" class="option-btn" data-lat="50.8505" data-lon="4.3488">Brussel</button>
+        <button type="button" class="option-btn" data-lat="51.2089" data-lon="3.2242">Brugge</button>
+        <button type="button" class="option-btn" data-lat="51.05" data-lon="3.7167">Ghent</button>
+        <button type="button" class="option-btn" data-lat="51,2205" data-lon="4.4003">Antwerpen</button>
+        <button type="button" class="option-btn" data-lat="50.9311" data-lon="5.3378">Hasselt</button>
+        <button type="button" class="option-btn" data-lat="50.8796" data-lon="4.7009">Leuven</button>
+    
+        <div id="error" role="alert" aria-live="assertive"></div>
     </div>
 
+    <main id="forecast" aria-live="polite" aria-relevant="additions"></main>
+    <script src="../Js/7dagen.js"></script>
 </body>
 </html>
