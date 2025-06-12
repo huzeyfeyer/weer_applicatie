@@ -46,11 +46,12 @@ function getWeatherInfo(code) {
     return map[code] || { icon: "wi-na", bg: "default.jpg" };
 }
 
-  // Weerdata ophalen  van API
+  // Weerdata ophalen  van API + foutcontrole
   async function fetchWeatherData(lat, lon) {
     const datum = datePicker.value;
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,precipitation,weathercode,windspeed_10m&current_weather=true&past_days=30&timezone=Europe/Brussels`;
-      const res = await fetch(url);
+     try {
+    const res = await fetch(url);
       weatherData = await res.json();
 
       const current = {
@@ -64,6 +65,11 @@ function getWeatherInfo(code) {
 
       updateWorkAdvisory(current);
       displayHourlyData(datum);
+      displayPrecipitationChart();
+          } catch (e) {
+      console.error("Fout bij ophalen data:", e);
+      hourlyContainer.innerHTML = "<p>Data kon niet geladen worden.</p>";
+    }
   }
  //Gebruik huidige locatie
   geoButton.addEventListener("click", () => {
