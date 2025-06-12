@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Droogte Safety Tips</title>
+    <link rel="stylesheet" href="../css/detail.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Advies sectie -->
+   <main id="droogte" class="content-section">
+    <h1>Safety Tips bij Droogte</h1>
+    <p>Bij aanhoudende droogte kunnen technische taken risicovoller worden. Denk aan verhoogde kans op stofvorming, uitdroging of beperkte beschikbaarheid van koelwater. Hier zijn enkele tips:</p>
+    <ul>
+        <li>Werk indien mogelijk vroeg in de ochtend of binnen.</li>
+        <li>Draag beschermende kleding en zonnebril.</li>
+        <li>Vermijd lassen of slijpen op zeer droge ondergrond (brandrisico).</li>
+        <li>Drink regelmatig water – neem een drinkpauze elke 45 minuten.</li>
+    </ul>
+
+    <h2>Risico bij Droogte</h2>
+    <ul>
+        <li>Geurhinder en verstoppingen door ophoping van vuil en sediment in leidingen.</li>
+        <li>Concentratie van slib en chemische stoffen kan leiden tot afwijkende pH-waarden, met risico op corrosie of schade aan installaties.</li>
+        <li>Verhoogde kans op technische storingen bij onvoldoende spoeling van buffers of leidingen.</li>
+    </ul>
+
+    <h2>Benodigd Gereedschap voor Droge Dagen</h2>
+    <ul>
+        <li>Stofmasker en veiligheidsbril</li>
+        <li>Brandblusser in de nabijheid</li>
+        <li>Waterreservoir voor koeling/reiniging</li>
+        <li>UV-bestendige werkkledij</li>
+    </ul>
+
+    <h2>Dagelijkse Neerslaganalyse</h2>
+    <canvas id="dagGrafiek"></canvas>
+</main>
+  <!-- Grafiek marge van de dag -->
+
+    <script>
+        const ctx = document.getElementById('dagGrafiek').getContext('2d');
+
+        const uren = ["06u", "07u", "08u", "09u", "10u", "11u", "12u", "13u", "14u", "15u"];
+        const neerslag = [0.0, 0.0, 0.1, 0.0, 0.0, 0.0, 0.2, 0.1, 0.0, 0.0];
+        const droogtegrens = Array(uren.length).fill(0.1);
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: uren,
+                datasets: [
+                    {
+                        label: "Neerslag (mm)",
+                        data: neerslag,
+                        borderColor: "blue",
+                        fill: true,
+                        backgroundColor: "rgba(0,0,255,0.1)"
+                    },
+                    {
+                        label: "Droogtegrens (0.1 mm)",
+                        data: droogtegrens,
+                        borderColor: "orange",
+                        borderDash: [5, 5],
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

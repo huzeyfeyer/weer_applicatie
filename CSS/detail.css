@@ -1,0 +1,98 @@
+/* Algemene basisstijl */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Navigatie */
+nav {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Inhoud container */
+.content-section {
+    background-color: white;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Titels */
+.content-section h1 {
+    font-size: 2em;
+    text-align: center;
+    color: #007bff;
+    margin-top: 0;
+}
+
+.content-section h2 {
+    font-size: 1.3em;
+    margin-top: 30px;
+    text-align: center;
+    color: #444;
+}
+
+
+.content-section ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.content-section li {
+    margin-bottom: 10px;
+}
+
+/* Grafiek */
+canvas {
+    max-width: 100%;
+    height: auto;
+    margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .content-section {
+        padding: 20px;
+        margin: 20px 10px;
+    }
+
+    h1 {
+        font-size: 1.6em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+}
