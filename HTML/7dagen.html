@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>7 dagen</title>
     <link rel="stylesheet" href="/CSS/global.css">
+    <script src="Js/7dagen.js"></script>
 </head>
 <body>
     <nav>
@@ -17,19 +18,13 @@
 
     <h1>7 Dagen Weer</h1>
     <p>Hier komt de 7 dagen weersvoorspelling.</p>
-    <div class="search-container">
-        <label for="zoekInput">Zoek naar een locatie:</label>
-        <input type="text">
-        <button id="zoekButton">Zoeken</button>
-    </div>
-    <div class="card-container">
-        <div class="card">
-            <h2>Maandag</h2>
-            <p>Temperatuur: 20°C</p>
-            <p>Min: 13°C</p>
-            <p>Max: 25°C</p>
-            <p>Neerslag: 3mm</p>
-        </div>
+    <div class="options" role="list" aria-label="Beschikbare steden">
+        <button type="button" class="option-btn" data-lat="">Brussel</button>
+        <button type="button">Brugge</button>
+        <button type="button">Ghent</button>
+        <button type="button">Antwerpen</button>
+        <button type="button">Hasselt</button>
+        <button type="button">Leuven</button>
     </div>
 
 </body>
