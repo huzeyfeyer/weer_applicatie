@@ -1,13 +1,13 @@
 window.addEventListener("DOMContentLoaded", () => {
-
-// ophalen van setup data
+    // ophalen van setup data
     const datePicker = document.getElementById('datumKiezer');
     const locationSelector = document.getElementById("provincieSelect");
-    const geoButton = document.getElementById("gebruikLocatieBtn");
+    const geoButton = document.getElementById("gebruikLocatieKnop");
     const toonWeerKnop = document.getElementById("toonWeerKnop");
     const hourlyContainer = document.getElementById("hourly-weather-container");
     const advisoryPanel = document.getElementById("work-advisory");
     const ctx = document.getElementById('neerslagGrafiek').getContext('2d');
+    const locationLabel = document.getElementById("locatieNaam");
     const bodyElement = document.body;
 
     let weatherChart = null;
@@ -16,7 +16,8 @@ window.addEventListener("DOMContentLoaded", () => {
     // Vul datum automatisch in met vandaag
     datePicker.value = new Date().toISOString().split("T")[0];
 
-// weer per uur laten verschijnen
+    
+    // weer per uur laten verschijnen
     function displayHourlyData(date) {
         hourlyContainer.innerHTML = "";
         if (!weatherData) return;
@@ -141,12 +142,15 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     // Weerdata ophalen van API + foutcontrole
-    async function fetchWeatherData(lat, lon) {
+    async function fetchWeatherData(lat, lon, naam = "") {
         const datum = datePicker.value;
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,precipitation,weathercode,windspeed_10m&current_weather=true&past_days=30&timezone=Europe/Brussels`;
+
         try {
             const res = await fetch(url);
+            if (!res.ok) throw new Error(`Open-Meteo API gaf status ${res.status}`);
             weatherData = await res.json();
+            if (!weatherData?.hourly || !weatherData?.current_weather) throw new Error("Onvolledige data ontvangen.");
 
             const index = weatherData.hourly.time.indexOf(weatherData.current_weather.time);
             const current = {
@@ -156,22 +160,34 @@ window.addEventListener("DOMContentLoaded", () => {
                 precipitation: index >= 0 ? weatherData.hourly.precipitation[index] : 0
             };
 
+            locationLabel.textContent = `📍 Locatie: ${naam}`;
             updateWorkAdvisory(current);
             displayHourlyData(datum);
             displayPrecipitationChart();
         } catch (e) {
             console.error("Fout bij ophalen data:", e);
             hourlyContainer.innerHTML = "<p>Data kon niet geladen worden.</p>";
+            locationLabel.textContent = "Fout bij laden locatiegegevens.";
         }
     }
 
-    // Gebruik huidige locatie
-    geoButton.addEventListener("click", () => {
-        navigator.geolocation?.getCurrentPosition(
-            pos => fetchWeatherData(pos.coords.latitude, pos.coords.longitude),
-            () => alert("Locatie niet beschikbaar.")
-        );
-    });
+    // Gebruik huidige locatie automatisch bij opstart
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+            try {
+                const response = await fetch(`https://geocode.maps.co/reverse?lat=${lat}&lon=${lon}`);
+                const data = await response.json();
+                const plaatsnaam = data.address?.city || data.address?.town || data.address?.village || "jouw locatie";
+                fetchWeatherData(lat, lon, plaatsnaam);
+            } catch {
+                fetchWeatherData(lat, lon, "jouw locatie");
+            }
+        }, () => {
+            locationLabel.textContent = "Locatie niet beschikbaar, kies een provincie.";
+        });
+    }
 
     // Toon weer op basis van provincie
     toonWeerKnop.addEventListener("click", () => {
@@ -181,7 +197,39 @@ window.addEventListener("DOMContentLoaded", () => {
             alert("Kies een provincie en datum.");
             return;
         }
-        fetchWeatherData(option.dataset.lat, option.dataset.lon);
+        fetchWeatherData(option.dataset.lat, option.dataset.lon, option.textContent);
     });
 
+    // Locatie opnieuw proberen via knop
+    geoButton?.addEventListener("click", () => {
+        location.reload();
+    });
+
+    // Lege grafiek tonen
+    weatherChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: ["", "", "", "", "", "", ""],
+            datasets: [{
+                label: "Neerslag (mm)",
+                data: [0, 0, 0, 0, 0, 0, 0],
+                borderColor: "lightgray",
+                backgroundColor: "rgba(200,200,200,0.2)",
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "#888"
+                    }
+                }
+            }
+        }
+    });
 });
