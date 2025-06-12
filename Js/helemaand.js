@@ -119,12 +119,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         for (let i = 0; i < data.time.length; i++) {
             const datum = new Date(data.time[i]).toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit', weekday: 'short' });
+            
+            const neerslag = data.precipitation_sum[i];
+
+            // Bepaal de rijklasse op basis van de neerslag
+            let rijKlasse = '';
+            if (neerslag > 10) {
+                rijKlasse = 'text-danger'; // Zware neerslag
+            } else if (neerslag > 5) {
+                rijKlasse = 'text-warning'; // Matige neerslag
+            }
+            
             html += `
-                <tr>
+                <tr class="${rijKlasse}">
                     <td>${datum}</td>
                     <td>${data.temperature_2m_max[i].toFixed(1)}°C</td>
                     <td>${data.temperature_2m_min[i].toFixed(1)}°C</td>
-                    <td>${data.precipitation_sum[i].toFixed(1)}</td>
+                    
+                    <td>${neerslag.toFixed(1)}</td>
                     <td>${vertaalWeercode(data.weathercode[i])}</td>
                 </tr>
             `;

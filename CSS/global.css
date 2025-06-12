@@ -24,3 +24,32 @@ nav a {
 
 
 
+/* Stijlen specifiek voor de planningstabel op helemaand.html */
+
+/* Basisstijl voor de details-tabel */
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.details-table th, .details-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.details-table th {
+    background-color: #f2f2f2;
+}
+
+/* Stijlen voor de rijen in de details-tabel */
+.details-table tr.text-danger {
+    background-color: #f8d7da; /* Lichtrood */
+    color: #721c24; 
+}
+
+.details-table tr.text-warning {
+    background-color: #fff3cd; /* Lichtgeel */
+    color: #856404;
+} 
