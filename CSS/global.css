@@ -4,6 +4,35 @@ body{
     margin: 0;
     padding: 0; 
 }
+
+body.weather-bg {
+    transition: background-image 0.5s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+main {
+    flex: 1;
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #222;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+h2 {
+    color: #333;
+    margin-top: 30px;
+    text-align: center;
+}
+
+
 nav{
     background-color: #333;
     padding: 10px 0;
@@ -22,7 +51,16 @@ nav a {
     transition: background-color 0.3s;
 }
 
-
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.9em;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+}
 
 /* Stijlen specifiek voor de planningstabel op helemaand.html */
 
@@ -53,3 +91,61 @@ nav a {
     background-color: #fff3cd; /* Lichtgeel */
     color: #856404;
 } 
+
+/* Gemeenschappelijke labels en knoppen */
+label {
+    font-weight: bold;
+}
+
+button {
+    cursor: pointer;
+}
+
+.text-danger {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.text-warning {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.placeholder {
+    text-align: center;
+    color: #777;
+    padding: 40px 0;
+    font-style: italic;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive layout algemeen */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main {
+        padding: 20px 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 992px) {
+    canvas {
+        width: 100% !important;
+        height: auto !important;
+    }
+}
