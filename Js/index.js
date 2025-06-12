@@ -1,5 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
 
+    //ophalen van setup data
 const datePicker = document.getElementById('datumKiezer');
 const locationSelector = document.getElementById("provincieSelect");
 const geoButton = document.getElementById("gebruikLocatieBtn");
@@ -11,3 +12,5 @@ const bodyElement = document.body;
 
 let weatherChart = null;
 let weatherData = null;
+
+});
