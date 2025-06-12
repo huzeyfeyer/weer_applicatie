@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Maand Overzicht – Weer Applicatie</title>
+    <link rel="stylesheet" href="../CSS/global.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="weather-bg">
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="7dagen.html">Volgende 7 Dagen</a></li>
+            <li><a href="helemaand.html" class="active">Maand Overzicht</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Maand Overzicht</h1>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <label for="provincieSelect">Kies een provincie:</label>
+            <select id="provincieSelect">
+                <option value="">-- Geen provincie gekozen --</option>
+                <option value="antwerpen" data-lat="51.2194" data-lon="4.4025">Antwerpen</option>
+                <option value="limburg" data-lat="50.9307" data-lon="5.3378">Limburg</option>
+                <option value="oostvlaanderen" data-lat="51.0362" data-lon="3.7373">Oost-Vlaanderen</option>
+                <option value="westvlaanderen" data-lat="51.0560" data-lon="3.7160">West-Vlaanderen</option>
+                <option value="vlaamsbrabant" data-lat="50.8800" data-lon="4.7170">Vlaams-Brabant</option>
+            </select>
+            <button id="toonGrafiekBtn">Toon Maandoverzicht</button>
+        </section>
+
+        <section class="content-section">
+            <h2>Weeroverzicht komende 16 dagen</h2>
+            <canvas id="maandGrafiek" height="300"></canvas>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Aquafin - Weer Applicatie | Alle rechten voorbehouden</p>
+    </footer>
+
+    <script src="../Js/helemaand.js"></script>
+</body>
+</html>
