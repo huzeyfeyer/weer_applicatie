@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Selecteer de HTML-elementen op basis van hun ID en bewaar ze in constanten.
     const provincieSelect = document.getElementById('provincieSelect');
     const toonKnop = document.getElementById('toonOverzichtBtn');
+    const locatieBtn = document.getElementById('gebruikLocatieBtn'); // Nieuw toegevoegd
+    const locatieNaam = document.getElementById('locatieNaam'); // Nieuw toegevoegd
     const voorspellingContainer = document.getElementById('voorspellingContainer');
 
     // We controleren of de elementen gevonden zijn.
@@ -17,28 +19,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Voeg een 'click' event listener toe aan de knop.
-    
     toonKnop.addEventListener('click', function() {
-
-        // Haal de waarde (value) op van de optie die de gebruiker heeft gekozen in de dropdown.
         const geselecteerdeProvincie = provincieSelect.value;
-        
-        // Controleer of de gebruiker wel een provincie heeft geselecteerd.
         if (geselecteerdeProvincie) {
-
-            // Toon een tijdelijke laadmelding in de container.
-            
             voorspellingContainer.innerHTML = `<p>Gegevens voor ${geselecteerdeProvincie} worden geladen...</p>`;
             haalWeerDataOp(geselecteerdeProvincie);
         } else {
-            // Als er geen provincie is geselecteerd, geef een foutmelding weer.
             voorspellingContainer.innerHTML = "<p>Selecteer alstublieft eerst een provincie.</p>";
         }
     });
 
+    // Nieuw: Voeg event toe aan locatieknop
+    locatieBtn?.addEventListener('click', () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async (pos) => {
+                const lat = pos.coords.latitude;
+                const lon = pos.coords.longitude;
+                try {
+                    const response = await fetch(`https://geocode.maps.co/reverse?lat=${lat}&lon=${lon}`);
+                    const data = await response.json();
+                    const plaatsnaam = data.address?.city || data.address?.town || data.address?.village || 'jouw locatie';
+                    locatieNaam.textContent = `📍 Voorspelling voor ${plaatsnaam} (${lat.toFixed(2)}, ${lon.toFixed(2)})`;
+                    haalWeerDataOpCoord(lat, lon);
+                } catch {
+                    locatieNaam.textContent = `📍 Voorspelling voor jouw locatie (${lat.toFixed(2)}, ${lon.toFixed(2)})`;
+                    haalWeerDataOpCoord(lat, lon);
+                }
+            }, () => {
+                voorspellingContainer.innerHTML = '<p>Locatie niet beschikbaar. Kies een provincie.</p>';
+            });
+        }
+    });
 
     // Definieer de coördinaten voor elke provincie in België.
-    // Deze coördinaten worden gebruikt om de weersvoorspelling op te halen.
     const provincieCoords = {
         'antwerpen': { lat: 51.2194, lon: 4.4025 },
         'limburg': { lat: 50.931, lon: 5.338 },
@@ -54,25 +67,20 @@ document.addEventListener('DOMContentLoaded', function() {
             voorspellingContainer.innerHTML = `<p>Kon de coördinaten voor ${provincie} niet vinden.</p>`;
             return;
         }
+        locatieNaam.textContent = `📍 Voorspelling voor ${provincie}`;
+        haalWeerDataOpCoord(coords.lat, coords.lon);
+    }
 
-        // Stel de API URL samen met de coördinaten en de gewenste parameters.
-        const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&forecast_days=16&timezone=Europe/Brussels`;
-
+    async function haalWeerDataOpCoord(lat, lon) {
+        const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&forecast_days=16&timezone=Europe/Brussels`;
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) {
-                // Als de response niet OK is, gooien we een fout.
                 throw new Error(`Netwerkfout: ${response.statusText}`);
             }
             const data = await response.json();
-
-            // Log de opgehaalde data naar de console voor debugging.
             console.log("Opgehaalde weerdata:", data);
-            
-            
-            // voorspellingContainer.innerHTML = `<p>Data voor ${provincie} succesvol opgehaald. Zie de console voor details.</p>`;
-            toonVoorspelling(data.daily, provincie);
-
+            toonVoorspelling(data.daily);
         } catch (error) {
             console.error("Fout bij het ophalen van de weerdata:", error);
             voorspellingContainer.innerHTML = `<p>Er is een fout opgetreden bij het ophalen van de gegevens.</p>`;
@@ -81,9 +89,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
 
-    function toonVoorspelling(data, provincie) {
-        let html = `<h3>Weersvoorspelling voor ${provincie}</h3>`;
-        html += '<table class="details-table">'; // Start de tabel met een klasse voor styling
+    function toonVoorspelling(data) {
+        let html = `<table class="details-table">`;
         html += `
             <thead>
                 <tr>
@@ -99,41 +106,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         for (let i = 0; i < data.time.length; i++) {
             const datum = new Date(data.time[i]).toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit', weekday: 'short' });
-            
             const neerslag = data.precipitation_sum[i];
 
-
-            // Bepaal de waarschuwing op basis van de hoeveelheid neerslag
-            let waarschuwing = '';
-            let waarschuwingKlasse = '';
+            // Bepaal de rijklasse op basis van de neerslag
             let rijKlasse = '';
-            
-            if (neerslag === 0) {
-                waarschuwing = 'Droogte';
-                waarschuwingKlasse = 'warning-droogte';
-                rijKlasse = 'text-warning'; // Droogte wordt als waarschuwing weergegeven
-            } else if (neerslag > 10) {
-                waarschuwing = 'Overstroming';
-                waarschuwingKlasse = 'warning-overstroming';
-                rijKlasse = 'text-danger'; // Zware neerslag wordt als waarschuwing weergegeven
+            if (neerslag > 10) {
+                rijKlasse = 'text-danger'; // Zware neerslag
+            } else if (neerslag > 5) {
+                rijKlasse = 'text-warning'; // Matige neerslag
             }
-            else if (neerslag > 5) {
-                waarschuwing = 'Hinderlijke regen';
-                waarschuwingKlasse = 'warning-hinder';
-                
-            } else {
-                waarschuwing = 'Normaal weer';
-                waarschuwingKlasse = 'warning-normaal';
-            }
-
-          
             
             html += `
                 <tr class="${rijKlasse}">
                     <td>${datum}</td>
                     <td>${data.temperature_2m_max[i].toFixed(1)}°C</td>
                     <td>${data.temperature_2m_min[i].toFixed(1)}°C</td>
-                    
                     <td>${neerslag.toFixed(1)}</td>
                     <td class="${waarschuwingKlasse}">${waarschuwing}</td>
                     
@@ -145,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         html += '</tbody></table>';
         voorspellingContainer.innerHTML = html;
     }
+
+
     
-
-
 });

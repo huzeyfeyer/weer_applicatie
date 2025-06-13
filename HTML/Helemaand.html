@@ -26,25 +26,29 @@
     
     
 
-    <main>
-        <section class="content-section">
-            <label for="provincieSelect">Kies een provincie:</label>
-            <select id="provincieSelect">
-                <option value="">-- Geen provincie gekozen --</option>
-                <option value="antwerpen" data-lat="51.2194" data-lon="4.4025">Antwerpen</option>
-                <option value="limburg" data-lat="50.9307" data-lon="5.3378">Limburg</option>
-                <option value="oost-vlaanderen" data-lat="51.0362" data-lon="3.7373">Oost-Vlaanderen</option>
-                <option value="west-vlaanderen" data-lat="51.0560" data-lon="3.7160">West-Vlaanderen</option>
-                <option value="vlaams-brabant" data-lat="50.8800" data-lon="4.7170">Vlaams-Brabant</option>
-            </select>
-            <button id="toonOverzichtBtn">Toon Maandoverzicht</button>
-        </section>
+<main>
+    <section class="content-section">
+        <!-- Nieuw toegevoegd: knop en locatie tekst -->
+        <button id="gebruikLocatieBtn">📍 Gebruik mijn locatie</button>
+        <p id="locatieNaam" class="locatie-label"></p>
 
-        <!-- De resultaten komen hier -->
-        <section id="voorspellingContainer" class="content-section">
-            <p>Kies een provincie en klik op 'Toon Overzicht' om de weersvoorspelling te zien.</p>
-        </section>
-    </main>
+        <label for="provincieSelect">Kies een provincie:</label>
+        <select id="provincieSelect">
+            <option value="">-- Geen provincie gekozen --</option>
+            <option value="antwerpen" data-lat="51.2194" data-lon="4.4025">Antwerpen</option>
+            <option value="limburg" data-lat="50.9307" data-lon="5.3378">Limburg</option>
+            <option value="oost-vlaanderen" data-lat="51.0362" data-lon="3.7373">Oost-Vlaanderen</option>
+            <option value="west-vlaanderen" data-lat="51.0560" data-lon="3.7160">West-Vlaanderen</option>
+            <option value="vlaams-brabant" data-lat="50.8800" data-lon="4.7170">Vlaams-Brabant</option>
+        </select>
+        <button id="toonOverzichtBtn">Toon Maandoverzicht</button>
+    </section>
+
+    <!-- De resultaten komen hier -->
+    <section id="voorspellingContainer" class="content-section">
+        <p>Kies een provincie en klik op 'Toon Overzicht' om de weersvoorspelling te zien.</p>
+    </section>
+</main>
 
     <footer>
         <p>&copy; 2025 Aquafin - Weer Applicatie | Alle rechten voorbehouden</p>
