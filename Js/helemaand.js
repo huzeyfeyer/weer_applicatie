@@ -159,5 +159,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
+    // Lege grafiek bij opstart
+const ctx = document.getElementById('neerslagGrafiek')?.getContext('2d');
+let weatherChart = null;
+ 
+function initEmptyChart() {
+    if (!ctx) return;
+    weatherChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Neerslag (mm)',
+                data: [],
+                borderColor: 'blue',
+                backgroundColor: 'rgba(0,0,255,0.1)',
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+}
+ 
+initEmptyChart();
+
+
 
 });
