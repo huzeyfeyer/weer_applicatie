@@ -212,31 +212,4 @@ window.addEventListener("DOMContentLoaded", () => {
         location.reload();
     });
 
-    // Lege grafiek tonen
-    weatherChart = new Chart(ctx, {
-        type: "line",
-        data: {
-            labels: ["", "", "", "", "", "", ""],
-            datasets: [{
-                label: "Neerslag (mm)",
-                data: [0, 0, 0, 0, 0, 0, 0],
-                borderColor: "lightgray",
-                backgroundColor: "rgba(200,200,200,0.2)",
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: { beginAtZero: true }
-            },
-            plugins: {
-                legend: {
-                    labels: {
-                        color: "#888"
-                    }
-                }
-            }
-        }
-    });
 });

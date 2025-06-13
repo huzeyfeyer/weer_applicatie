@@ -85,6 +85,10 @@
     background-color: white;
 }
 
+#work-advisory.code-red { border-color: #dc3545; background-color: #f8d7da; }
+#work-advisory.code-orange { border-color: #fd7e14; background-color: #fff3cd; }
+#work-advisory.code-yellow { border-color: #ffc107; background-color: #fffbeb; }
+#work-advisory.code-green { display: none; }
 
 #work-advisory h3 {
     margin-top: 0;
