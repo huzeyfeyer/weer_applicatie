@@ -118,13 +118,16 @@ window.addEventListener("DOMContentLoaded", () => {
         daily[d] = (daily[d] || 0) + weatherData.hourly.precipitation[i];
     });
 
-    const labels = Object.keys(daily);
+    const labels = Object.keys(daily).map(d => new Date(d).toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit' }));
+    if (labels.length === 0) {
+        hourlyContainer.innerHTML = "<p>Geen neerslaggegevens beschikbaar voor deze periode.</p>";
+        return;
+    }
     const data = Object.values(daily);
-    const month = new Date(labels[0]).getMonth() + 1;
-    const season = getSeason(month);
-    const threshold = seasonalThresholds[season] || 250;
+   
 
-    const flood = Array(labels.length).fill(threshold);
+    // Bepaal de seizoensdrempel
+    const flood = Array(labels.length).fill(20); // 20 mm als standaard overstromingsdrempel
     const drought = Array(labels.length).fill(2);
 
     if (weatherChart) weatherChart.destroy();
@@ -135,7 +138,7 @@ window.addEventListener("DOMContentLoaded", () => {
             labels,
             datasets: [
                 { label: "Neerslag (mm)", data, borderColor: "blue", backgroundColor: "rgba(0,0,255,0.1)", fill: true },
-                { label: `Overstroming (${threshold} mm)`, data: flood, borderColor: "red", borderDash: [5, 5], fill: false },
+                { label: "Overstroming (20 mm)", data: flood, borderColor: "red", borderDash: [5, 5], fill: false },
                 { label: "Droogte (2 mm)", data: drought, borderColor: "orange", borderDash: [5, 5], fill: false }
             ]
         },
