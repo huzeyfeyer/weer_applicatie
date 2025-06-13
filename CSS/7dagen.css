@@ -33,3 +33,80 @@ body {
     display: flex;
     justify-content: flex-start;
 }
+.options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.option-btn{
+    background-color: #4c74af;
+    color: white;
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+main#forecast {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.day-card{
+    background: rgba(241, 238, 240, 0.9);
+    margin-bottom: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.day-name{
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+    color: #4c74af;
+}
+.temp-max{
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #30496e;
+}
+
+.temp-min{
+    font-size: 1rem;
+    color: #718096;
+}
+
+.precipitation{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.material-icons {
+    font-size: 22px;
+    color: #4c74af;
+    user-select: none;
+}
+
+#error {
+    color: red;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 20px;
+}
