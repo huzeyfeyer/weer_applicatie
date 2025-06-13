@@ -80,6 +80,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             console.log("Opgehaalde weerdata:", data);
             toonVoorspelling(data.daily);
+            // Toon de neerslaggrafiek
+            if (weatherChart) {
+                weatherChart.destroy(); // Verwijder de oude grafiek
+            }
+            toonNeerslagGrafiek(data.daily);
         } catch (error) {
             console.error("Fout bij het ophalen van de weerdata:", error);
             voorspellingContainer.innerHTML = `<p>Er is een fout opgetreden bij het ophalen van de gegevens.</p>`;
@@ -156,6 +161,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
         html += '</tbody></table>';
         voorspellingContainer.innerHTML = html;
+    }
+
+    function toonNeerslagGrafiek(data) {
+         if (!ctx) return;
+        const labels = data.time.map(d => new Date(d).toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit' }));
+        const neerslag = data.precipitation_sum;
+        const overstroming = new Array(neerslag.length).fill(20); // 20mm sabit
+        const droogte = new Array(neerslag.length).fill(2); // 2mm sabit
+
+        if (weatherChart) {
+            weatherChart.destroy(); // Verwijder de oude grafiek
+        }
+        weatherChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Neerslag (mm)',
+                        data: neerslag,
+                        borderColor: 'blue',
+                        backgroundColor: 'rgba(0,0,255,0.1)',
+                        fill: true
+                    },
+                    {
+                        label: 'Overstroming (20mm)',
+                        data: overstroming,
+                        borderColor: 'red',
+                        backgroundColor: 'rgba(255,0,0,0.1)',
+                        fill: false,
+                        borderDash: [5, 5]
+                    },
+                    {
+                        label: 'Droogte (2mm)',
+                        data: droogte,
+                        borderColor: 'orange',
+                        backgroundColor: 'rgba(255,165,0,0.1)',
+                        fill: false,
+                        borderDash: [5, 5]
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
     }
 
 
