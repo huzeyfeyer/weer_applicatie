@@ -86,27 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function vertaalWeercode(code) {
-        const weercodes = {
-            0: 'Heldere hemel',
-            1: 'Grotendeels helder',
-            2: 'Deels bewolkt',
-            3: 'Zwaarbewolkt',
-            45: 'Mist',
-            48: 'Rijm',
-            51: 'Lichte motregen',
-            53: 'Matige motregen',
-            55: 'Dichte motregen',
-            61: 'Lichte regen',
-            63: 'Matige regen',
-            65: 'Zware regen',
-            80: 'Lichte regenbuien',
-            81: 'Matige regenbuien',
-            82: 'Hevige regenbuien',
-            95: 'Onweer'
-        };
-        return weercodes[code] || `Onbekend (${code})`;
-    }
+  
 
     function toonVoorspelling(data) {
         let html = `<table class="details-table">`;
@@ -117,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <th>Max Temp.</th>
                     <th>Min Temp.</th>
                     <th>Neerslag (mm)</th>
-                    <th>Omschrijving</th>
+                    <th>Waarschuwing</th>
                 </tr>
             </thead>
             <tbody>
@@ -126,19 +106,24 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < data.time.length; i++) {
             const datum = new Date(data.time[i]).toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit', weekday: 'short' });
             const neerslag = data.precipitation_sum[i];
+
+            // Bepaal de rijklasse op basis van de neerslag
             let rijKlasse = '';
             if (neerslag > 10) {
-                rijKlasse = 'text-danger';
+                rijKlasse = 'text-danger'; // Zware neerslag
             } else if (neerslag > 5) {
-                rijKlasse = 'text-warning';
+                rijKlasse = 'text-warning'; // Matige neerslag
             }
+            
             html += `
                 <tr class="${rijKlasse}">
                     <td>${datum}</td>
                     <td>${data.temperature_2m_max[i].toFixed(1)}°C</td>
                     <td>${data.temperature_2m_min[i].toFixed(1)}°C</td>
                     <td>${neerslag.toFixed(1)}</td>
-                    <td>${vertaalWeercode(data.weathercode[i])}</td>
+                    <td class="${waarschuwingKlasse}">${waarschuwing}</td>
+                    
+                    
                 </tr>
             `;
         }
