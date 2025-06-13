@@ -2,14 +2,13 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
     padding: 0;
     color: #333;
 }
 
 /* Navigatie */
 nav {
-    background-color: #333;
+    
     padding: 10px 0;
 }
 
@@ -21,19 +20,12 @@ nav ul {
     justify-content: center;
 }
 
-nav li {
-    margin: 0 15px;
-}
+
 
 nav a {
-    color: white;
     text-decoration: none;
-    font-weight: bold;
 }
 
-nav a:hover {
-    text-decoration: underline;
-}
 
 /* Inhoud container */
 .content-section {
