@@ -108,12 +108,25 @@ document.addEventListener('DOMContentLoaded', function() {
             const datum = new Date(data.time[i]).toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit', weekday: 'short' });
             const neerslag = data.precipitation_sum[i];
 
-            // Bepaal de rijklasse op basis van de neerslag
+            // Bepaal de waarschuwing op basis van de hoeveelheid neerslag
+            let waarschuwing = '';
+            let waarschuwingKlasse = '';
             let rijKlasse = '';
-            if (neerslag > 10) {
-                rijKlasse = 'text-danger'; // Zware neerslag
+            
+            if (neerslag === 0) {
+                waarschuwing = 'Droogte';
+                waarschuwingKlasse = 'warning-droogte';
+                rijKlasse = 'text-warning'; // Droogte wordt als waarschuwing weergegeven
+            } else if (neerslag > 10) {
+                waarschuwing = 'Overstroming';
+                waarschuwingKlasse = 'warning-overstroming';
+                rijKlasse = 'text-danger'; // Zware neerslag wordt als waarschuwing weergegeven
             } else if (neerslag > 5) {
-                rijKlasse = 'text-warning'; // Matige neerslag
+                waarschuwing = 'Hinderlijke regen';
+                waarschuwingKlasse = 'warning-hinder';
+            } else {
+                waarschuwing = 'Normaal weer';
+                waarschuwingKlasse = 'warning-normaal';
             }
             
             html += `
@@ -123,8 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td>${data.temperature_2m_min[i].toFixed(1)}°C</td>
                     <td>${neerslag.toFixed(1)}</td>
                     <td class="${waarschuwingKlasse}">${waarschuwing}</td>
-                    
-                    
                 </tr>
             `;
         }
