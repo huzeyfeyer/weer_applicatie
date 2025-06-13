@@ -1,0 +1,103 @@
+/* Bedieningspaneel voor dropdown en knoppen */
+.content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.content-section label,
+.content-section select,
+.content-section button {
+    font-size: 1em;
+}
+
+.content-section select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.content-section button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.content-section button:hover {
+    background-color: #0056b3;
+}
+
+/* Locatie label */
+#locatieNaam {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Weertabel */
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.details-table th,
+.details-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.details-table th {
+    background-color: #f1f1f1;
+}
+
+.text-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.text-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+/* Responsive gedrag */
+@media (max-width: 768px) {
+    .content-section {
+        padding: 0 20px;
+    }
+
+    .details-table {
+        font-size: 0.9em;
+    }
+}
+
+/* Neerslaggrafiek sectie */
+#neerslagGrafiekSectie {
+    margin-top: 40px;
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#neerslagGrafiekSectie h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+canvas#neerslagGrafiek {
+    max-width: 100%;
+    height: auto;
+}
+
