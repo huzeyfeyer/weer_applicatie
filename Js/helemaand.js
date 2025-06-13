@@ -79,27 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function vertaalWeercode(code) {
-        const weercodes = {
-            0: 'Heldere hemel',
-            1: 'Grotendeels helder',
-            2: 'Deels bewolkt',
-            3: 'Zwaarbewolkt',
-            45: 'Mist',
-            48: 'Rijm',
-            51: 'Lichte motregen',
-            53: 'Matige motregen',
-            55: 'Dichte motregen',
-            61: 'Lichte regen',
-            63: 'Matige regen',
-            65: 'Zware regen',
-            80: 'Lichte regenbuien',
-            81: 'Matige regenbuien',
-            82: 'Hevige regenbuien',
-            95: 'Onweer'
-        };
-        return weercodes[code] || `Onbekend (${code})`;
-    }
+  
 
     function toonVoorspelling(data, provincie) {
         let html = `<h3>Weersvoorspelling voor ${provincie}</h3>`;
@@ -111,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <th>Max Temp.</th>
                     <th>Min Temp.</th>
                     <th>Neerslag (mm)</th>
-                    <th>Omschrijving</th>
+                    <th>Waarschuwing</th>
                 </tr>
             </thead>
             <tbody>
@@ -122,13 +102,31 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const neerslag = data.precipitation_sum[i];
 
-            // Bepaal de rijklasse op basis van de neerslag
+
+            // Bepaal de waarschuwing op basis van de hoeveelheid neerslag
+            let waarschuwing = '';
+            let waarschuwingKlasse = '';
             let rijKlasse = '';
-            if (neerslag > 10) {
-                rijKlasse = 'text-danger'; // Zware neerslag
-            } else if (neerslag > 5) {
-                rijKlasse = 'text-warning'; // Matige neerslag
+            
+            if (neerslag === 0) {
+                waarschuwing = 'Droogte';
+                waarschuwingKlasse = 'warning-droogte';
+                rijKlasse = 'text-warning'; // Droogte wordt als waarschuwing weergegeven
+            } else if (neerslag > 10) {
+                waarschuwing = 'Overstroming';
+                waarschuwingKlasse = 'warning-overstroming';
+                rijKlasse = 'text-danger'; // Zware neerslag wordt als waarschuwing weergegeven
             }
+            else if (neerslag > 5) {
+                waarschuwing = 'Hinderlijke regen';
+                waarschuwingKlasse = 'warning-hinder';
+                
+            } else {
+                waarschuwing = 'Normaal weer';
+                waarschuwingKlasse = 'warning-normaal';
+            }
+
+          
             
             html += `
                 <tr class="${rijKlasse}">
@@ -137,7 +135,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td>${data.temperature_2m_min[i].toFixed(1)}°C</td>
                     
                     <td>${neerslag.toFixed(1)}</td>
-                    <td>${vertaalWeercode(data.weathercode[i])}</td>
+                    <td class="${waarschuwingKlasse}">${waarschuwing}</td>
+                    
+                    
                 </tr>
             `;
         }
