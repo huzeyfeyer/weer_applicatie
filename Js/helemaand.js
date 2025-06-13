@@ -1,4 +1,3 @@
-// Wacht tot de volledige HTML-pagina is geladen.
 document.addEventListener('DOMContentLoaded', function() {
 
     // Een simpele console.log om te controleren of ons script correct is geladen.
@@ -149,5 +148,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    
+
 });
