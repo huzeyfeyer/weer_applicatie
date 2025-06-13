@@ -70,6 +70,22 @@
     color: #856404;
 }
 
+
+/* Rijen klikbaar maken */
+
+.clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.clickable-row:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.01);
+    filter: brightness(0.95);
+}
+
+
+
 /* Responsive gedrag */
 @media (max-width: 768px) {
     .content-section {
@@ -100,4 +116,5 @@ canvas#neerslagGrafiek {
     max-width: 100%;
     height: auto;
 }
+
 

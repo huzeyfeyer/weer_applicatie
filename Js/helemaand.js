@@ -111,15 +111,22 @@ document.addEventListener('DOMContentLoaded', function() {
             let waarschuwing = '';
             let waarschuwingKlasse = '';
             let rijKlasse = '';
+            let rowClickable = '';
+            let extraClass = '';
+            let link = '';
             
             if (neerslag === 0) {
                 waarschuwing = 'Droogte';
                 waarschuwingKlasse = 'warning-droogte';
                 rijKlasse = 'text-warning'; // Droogte wordt als waarschuwing weergegeven
+                extraClass = 'clickable-row';
+                link = 'droogte.html'; // Link naar droogte pagina
             } else if (neerslag > 10) {
                 waarschuwing = 'Overstroming';
                 waarschuwingKlasse = 'warning-overstroming';
                 rijKlasse = 'text-danger'; // Zware neerslag wordt als waarschuwing weergegeven
+                extraClass = 'clickable-row';
+                link = 'overstroming.html'; // Link naar overstroming pagina
             } else if (neerslag > 5) {
                 waarschuwing = 'Hinderlijke regen';
                 waarschuwingKlasse = 'warning-hinder';
@@ -127,9 +134,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 waarschuwing = 'Normaal weer';
                 waarschuwingKlasse = 'warning-normaal';
             }
+
+            // als er een link is, voeg een onclick event toe
+            if (link) {
+                rowClickable = `onclick="window.location.href='${link}'"`;
+            } else {
+                rowClickable = '';
+            }
             
             html += `
-                <tr class="${rijKlasse}">
+                <tr class="${rijKlasse} ${extraClass}" ${rowClickable}>
+
                     <td>${datum}</td>
                     <td>${data.temperature_2m_max[i].toFixed(1)}°C</td>
                     <td>${data.temperature_2m_min[i].toFixed(1)}°C</td>
