@@ -79,7 +79,7 @@ h2 {
 #locatieNaam {
     font-size: 1.5em;
     font-weight: bold;
-    color: #007bff;
+    color: #222;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -157,29 +157,44 @@ canvas {
     height: auto;
 }
 
-/* Responsive layout algemeen */
 @media (max-width: 768px) {
-    nav ul {
+    .options {
         flex-direction: column;
-        align-items: center;
     }
-
-    main {
-        padding: 20px 10px;
+    .day-card {
+        width: 150px;
+        height: 180px;
     }
-
-    h1 {
-        font-size: 2em;
+    .day-name {
+        font-size: 1.2rem;
     }
-
-    h2 {
-        font-size: 1.3em;
+    .temp-max {
+        font-size: 1.8rem;
+    }
+    .temp-min {
+        font-size: 0.9rem;
+    }
+    .option-btn, #gebruikLocatieBtn {
+        width: 100%;
+        margin-bottom: 10px;
     }
 }
 
-@media (max-width: 992px) {
-    canvas {
-        width: 100% !important;
-        height: auto !important;
+@media (max-width: 480px) {
+    .day-card {
+        width: 100%;
+        height: auto;
+    }
+    .day-name {
+        font-size: 1rem;
+    }
+    .temp-max {
+        font-size: 1.5rem;
+    }
+    .temp-min {
+        font-size: 0.8rem;
+    }
+    .material-icons {
+        font-size: 18px;
     }
 }

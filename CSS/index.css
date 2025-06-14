@@ -115,14 +115,7 @@
     text-decoration: none;
 }
 
-/* Locatie naam bovenaan */
-#locatieNaam {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #007bff;
-    text-align: center;
-    margin-bottom: 20px;
-}
+
 
 /* Responsive specifiek voor index */
 @media (max-width: 768px) {
