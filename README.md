@@ -33,6 +33,11 @@ Deze applicatie toont weergegevens en geeft waarschuwingen in geval van een moge
 - **Js/**: JavaScript-bestanden voor logica en API-koppeling.  
 - **Img/**: Afbeeldingen (optioneel).
 
+## Bronnen
+
+- **Blackbox AI Chat**: [Blackbox Chat 1](https://www.blackbox.ai/chat/RQ978ys) .
+- **Blackbox AI Chat**: [Blackbox Chat 2](https://www.blackbox.ai/chat/3cOo1Av) .
+
 ## Technische details
 
 - **Weerdata**: Opgehaald via de Open-Meteo API.  
