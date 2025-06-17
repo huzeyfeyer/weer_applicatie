@@ -123,15 +123,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (neerslag === 0) {
                 waarschuwing = 'Droogte';
                 waarschuwingKlasse = 'warning-droogte';
-                rijKlasse = 'text-warning'; // Droogte wordt als waarschuwing weergegeven
+                rijKlasse = 'text-warning'; 
                 extraClass = 'clickable-row';
-                link = 'droogte.html'; // Link naar droogte pagina
+                link = 'droogte.html'; 
             } else if (neerslag > 10) {
                 waarschuwing = 'Overstroming';
                 waarschuwingKlasse = 'warning-overstroming';
-                rijKlasse = 'text-danger'; // Zware neerslag wordt als waarschuwing weergegeven
+                rijKlasse = 'text-danger'; 
                 extraClass = 'clickable-row';
-                link = 'overstroming.html'; // Link naar overstroming pagina
+                link = 'overstroming.html'; 
             } else if (neerslag > 5) {
                 waarschuwing = 'Hinderlijke regen';
                 waarschuwingKlasse = 'warning-hinder';
@@ -167,11 +167,11 @@ document.addEventListener('DOMContentLoaded', function() {
          if (!ctx) return;
         const labels = data.time.map(d => new Date(d).toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit' }));
         const neerslag = data.precipitation_sum;
-        const overstroming = new Array(neerslag.length).fill(20); // 20mm sabit
-        const droogte = new Array(neerslag.length).fill(2); // 2mm sabit
+        const overstroming = new Array(neerslag.length).fill(20); 
+        const droogte = new Array(neerslag.length).fill(2); 
 
         if (weatherChart) {
-            weatherChart.destroy(); // Verwijder de oude grafiek
+            weatherChart.destroy(); 
         }
         weatherChart = new Chart(ctx, {
             type: 'line',
