@@ -19,8 +19,8 @@ Deze applicatie toont weergegevens en geeft waarschuwingen in geval van een moge
    - Klik op "Toon Weer" voor een uurlijkse en maandelijkse analyse.
 
 3. **Bekijk waarschuwingen**  
-   - Bij zware neerslag (>10mm/uur) verschijnt een overstromingswaarschuwing.  
-   - Bij zeer weinig neerslag (<0.1mm/uur) verschijnt een droogtewaarschuwing.
+   - Bij zware neerslag verschijnt een overstromingswaarschuwing.  
+   - Bij zeer weinig neerslag $verschijnt een droogtewaarschuwing.
 
 4. **Bekijk details**  
    - Klik op "Maand Overzicht" voor een tabel met waarschuwingen per dag.  
@@ -44,10 +44,10 @@ Deze applicatie toont weergegevens en geeft waarschuwingen in geval van een moge
 ## Technische details
 
 - **Weerdata**: Opgehaald via de Open-Meteo API.  
-- **Risicodrempels**: /uur.  
+- **Risicodrempels**: Voor elk seizoen gelden richtwaarden voor maximale seizoensneerslag. Wanneer deze grenswaarden overschreden worden, neemt het risico op overstromingen toe. In de winter, van december tot februari, ligt de drempel op 300 millimeter. In 2023 viel er 330 millimeter neerslag, wat wijst op overstromingsgevaar. Tijdens de lente, van maart tot mei, bedraagt de richtwaarde 250 millimeter. In 2007 werd slechts 222 millimeter gemeten, wat eerder wijst op droogte dan op overstroming. In de zomer, van juni tot augustus, ligt de grens op 260 millimeter. In 2023 werd 270 millimeter geregistreerd, wat duidt op een licht verhoogd risico. Tot slot geldt in de herfst, van september tot november, een richtwaarde van 280 millimeter. Met een gemeten hoeveelheid van 305 millimeter in 2023 was er duidelijk sprake van overstromingsgevaar. 
 - **Grafieken**: Gerealiseerd met Chart.js.
 
 ## Installatie
 
-Geen installatie nodig. Open de gewenste HTML-pagina in je browser. Voor lokale API-calls kan een live server (zoals VS Code Live Server) handig zijn.
+Geen installatie nodig. Open de gewenste HTML-pagina in je browser. Voor lokale API-calls kan een live server handig zijn.
 
