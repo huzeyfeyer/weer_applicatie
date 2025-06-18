@@ -37,7 +37,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {
                     const response = await fetch(`https://geocode.maps.co/reverse?lat=${lat}&lon=${lon}`);
                     const data = await response.json();
-                    const plaatsnaam = data.address?.city || data.address?.town || data.address?.village || 'jouw locatie';
+                    const plaatsnaam =
+                    data.address?.city ||
+                    data.address?.town ||
+                    data.address?.village ||
+                    data.address?.municipality ||
+                    data.address?.county ||
+                    data.address?.state_district ||
+                    'jouw locatie';
+
                     locatieNaam.textContent = `📍 Voorspelling voor ${plaatsnaam} (${lat.toFixed(2)}, ${lon.toFixed(2)})`;
                     haalWeerDataOpCoord(lat, lon);
                 } catch {
@@ -153,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td>${datum}</td>
                     <td>${data.temperature_2m_max[i].toFixed(1)}°C</td>
                     <td>${data.temperature_2m_min[i].toFixed(1)}°C</td>
-                    <td>${neerslag.toFixed(1)}</td>
+                  <td>${(neerslag ?? 0).toFixed(1)}</td>
                     <td class="${waarschuwingKlasse}">${waarschuwing}</td>
                 </tr>
             `;

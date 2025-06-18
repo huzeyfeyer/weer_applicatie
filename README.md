@@ -5,8 +5,8 @@ Deze applicatie toont weergegevens en geeft waarschuwingen in geval van een moge
 ## Functionaliteiten
 
 - **Overzicht per dag en maand**: Bekijk het weer, neerslag en risico's per provincie of op basis van je locatie.
-- **Overstromings- en droogtewaarschuwingen**: Het systeem geeft automatisch waarschuwingen bij risicovolle neerslaghoeveelheden.
-- **Interactieve grafieken**: Visualisatie van neerslagdata en drempelwaarden voor overstroming en droogte.
+- **Overstromings- en droogtewaarschuwingen**: Het systeem geeft automatisch waarschuwingen bij risicovolle neerslaghoeveelheden per dag, week of maand.
+- **Interactieve grafieken**: Visualisatie van neerslagdata en drempelwaarden voor overstroming en droogte aan de hand van een grafiek.
 - **Safety tips**: Adviezen en richtlijnen voor technische medewerkers bij droogte of overstroming.
 
 ## Gebruik
@@ -31,17 +31,20 @@ Deze applicatie toont weergegevens en geeft waarschuwingen in geval van een moge
 - **HTML/**: Bevat de verschillende pagina's (Index, 7dagen, Helemaand, droogte, overstroming).  
 - **CSS/**: Stijlen voor de applicatie.  
 - **Js/**: JavaScript-bestanden voor logica en API-koppeling.  
-- **Img/**: Afbeeldingen (optioneel).
+  **Img/**: Afbeeldingen op pagina 7 dagen.
 
 ## Bronnen
 
 - **Blackbox AI Chat**: [Blackbox Chat 1](https://www.blackbox.ai/chat/RQ978ys) .
 - **Blackbox AI Chat**: [Blackbox Chat 2](https://www.blackbox.ai/chat/3cOo1Av) .
+   **Afbeelding Aquafin**:(https://images.app.goo.gl/dLyuzwY6vUmjrNQK9)
+  **Dynamische grafiek**:(https://github.com/chartjs/Chart.js)
+
 
 ## Technische details
 
 - **Weerdata**: Opgehaald via de Open-Meteo API.  
-- **Risicodrempels**: Overstroming bij >10mm/uur, droogte bij <0.1mm/uur.  
+- **Risicodrempels**: /uur.  
 - **Grafieken**: Gerealiseerd met Chart.js.
 
 ## Installatie
