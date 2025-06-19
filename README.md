@@ -1,53 +1,96 @@
 # Weerdata Applicatie
 
-Deze applicatie toont weergegevens en geeft waarschuwingen in geval van een mogelijke overstromingsrisico of droogte.
+Deze applicatie is een weerapplicatie, bedoeld voor de techniekers van Aquafin die dagelijks buiten werken. Omdat weersomstandigheden zoals droogte of overstromingen een grote invloed hebben op hun veiligheid en de werkplanning gepland door planners van Aquafin, biedt deze tool hen actuele neerslagvoorspellingen en grafieken om beter te begrijpen hoe het weer zal veranderen over de dag, week of maand. Via adviespagina’s krijgen ze tips over welk materiaal ze het best gebruiken bij extreme weersituaties. Deze inzichten zijn gebaseerd op gesprekken met technieker Gwen Temperman, die concrete noden en risico’s uit de praktijk aanhaalde.
 
-## Functionaliteiten
+# Design Thinking
 
-- **Overzicht per dag en maand**: Bekijk het weer, neerslag en risico's per provincie of op basis van je locatie.
-- **Overstromings- en droogtewaarschuwingen**: Het systeem geeft automatisch waarschuwingen bij risicovolle neerslaghoeveelheden per dag, week of maand.
-- **Interactieve grafieken**: Visualisatie van neerslagdata en drempelwaarden voor overstroming en droogte aan de hand van een grafiek.
-- **Safety tips**: Adviezen en richtlijnen voor technische medewerkers bij droogte of overstroming.
+**Probleem:** Techniekers van Aquafin werken dagelijks buiten en worden geconfronteerd met risico’s bij droogte of overstromingen. Er was geen eenvoudige tool om weersomstandigheden te raadplegen en werkrisico’s per regio in te schatten.
+**Oplossing:** We ontwikkelden een webapplicatie die weerdata visualiseert en tips geeft over hoe techniekers hun werk moeten aanpassen in functie van het weer. Deze bevat een locatiekiezer, uurlijkse neerslagvoorspelling en aparte adviespagina’s.
 
-## Gebruik
+# Analyse & structuur
 
-1. **Start de applicatie**  
-   Open [HTML/Index.html](HTML/Index.html) in je browser.
+De applicatie bevat:
 
-2. **Kies een provincie of gebruik je locatie**  
-   - Selecteer een provincie en datum, of klik op "Gebruik mijn locatie".  
-   - Klik op "Toon Weer" voor een uurlijkse en maandelijkse analyse.
+* Homepagina met welkomstboodschap en knoppen
+* Neerslagoverzicht met grafiek en kaart (Chart.js + eigen JSON/API)
+* Twee aparte adviespagina’s: overstroming & droogte
+* Technische opbouw in HTML, Tailwind, JavaScript en JSON-bestanden
+* Navigatie- en layoutconsistentie via globale CSS
 
-3. **Bekijk waarschuwingen**  
-   - Bij zware neerslag verschijnt een overstromingswaarschuwing.  
-   - Bij zeer weinig neerslag $verschijnt een droogtewaarschuwing.
+# Coderingsmethodes & kwaliteitsbewaking
 
-4. **Bekijk details**  
-   - Klik op "Maand Overzicht" voor een tabel met waarschuwingen per dag.  
-   - Klik op een dag met waarschuwing voor meer safety tips.
+* Heldere mappenstructuur (`js`, `css`, `data`)
+* Elke feature is afzonderlijk getest (o.a. provincieknoppen, locatiefunctie)
+* Code is gestructureerd met functies, foutafhandeling en inputcontrole
 
-## Bestandenstructuur
+# Planning
 
-- **HTML/**: Bevat de verschillende pagina's (Index, 7dagen, Helemaand, droogte, overstroming).  
-- **CSS/**: Stijlen voor de applicatie.  
-- **Js/**: JavaScript-bestanden voor logica en API-koppeling.  
-  **Img/**: Afbeeldingen op pagina 7 dagen.
+* Eerste week: analyse en mockup in Figma
+* Tweede week: feedback van Gwen en aanpassing – Homepagina, API, maandoverzicht, weekoverzicht en adviespagina's
+* Derde week: Styling & grafieken toegevoegd. Dubbelcheck en testing
 
-## Bronnen
+# Uitgewerkte analyse
+
+De weerapplicatie bestaat uit statische en dynamische componenten:
+
+* Homepagina met navigatie en toelichting
+* Pagina met uurlijkse neerslaggrafiek, op basis van een eigen JSON API
+* Twee adviespagina’s met veiligheidsrichtlijnen: droogte en overstroming
+* Interactieve dropdowns en locatieknoppen in JavaScript
+* Styling via Tailwind en responsief gedrag getest
+
+# Design thinking toegepast
+
+* Werknemers van Aquafin hebben praktische info nodig om zich voor te bereiden op het weer
+* De applicatie stelt aangepaste adviezen voor per weersituatie
+* Locatie en provincie worden automatisch of manueel geselecteerd
+
+# Volgen van projectplan
+
+* Alle onderdelen werden gerealiseerd binnen de geplande weken (zie planning hierboven)
+* Elke component werd afzonderlijk getest en opgebouwd: dataweergave, navigatie, advies
+
+# Git & versiebeheer
+
+* Ontwikkeling gebeurde via branches, regelmatig gecommit
+* Opgeslagen in GitHub met hoofdmap en duidelijke structuur
+
+# Functionaliteiten
+
+* Overzicht per dag en maand
+* Overstromings- en droogtewaarschuwingen
+* Interactieve grafieken
+* Safety tips per weersituatie
+
+# Gebruik
+
+1. Start de applicatie door `index.html` te openen in de browser
+2. Kies een provincie of gebruik je locatie
+3. Bekijk waarschuwingen bij extreme waarden
+4. Navigeer naar "maand overzicht" of specifieke tips bij waarschuwingen
+
+# Bestandenstructuur
+
+* `HTML/`: bevat de pagina's (index, 7dagen, helemaand, droogte, overstroming)
+* `CSS/`: stijlen voor de applicatie
+* `Js/`: JavaScript voor logica en API-koppeling
+* `Img/`: afbeeldingen gebruikt in de weekweergave
+
+# Bronnen en digitale hulpmiddelen
 
 - **Blackbox AI Chat**: [Blackbox Chat 1](https://www.blackbox.ai/chat/RQ978ys) .
 - **Blackbox AI Chat**: [Blackbox Chat 2](https://www.blackbox.ai/chat/3cOo1Av) .
    **Afbeelding Aquafin**:(https://images.app.goo.gl/dLyuzwY6vUmjrNQK9)
   **Dynamische grafiek**:(https://github.com/chartjs/Chart.js)
+  -**API**:(https://open-meteo.com/)
+  - **CHATGPT**:(Gebruik bij debuggen van code)
 
+# Technische details
 
-## Technische details
+* Weerdata via Open-Meteo API
+* Risicodrempels per seizoen (zie README)
+* Grafieken via Chart.js
 
-- **Weerdata**: Opgehaald via de Open-Meteo API.  
-- **Risicodrempels**: Voor elk seizoen gelden richtwaarden voor maximale seizoensneerslag. Wanneer deze grenswaarden overschreden worden, neemt het risico op overstromingen toe. In de winter, van december tot februari, ligt de drempel op 300 millimeter. In 2023 viel er 330 millimeter neerslag, wat wijst op overstromingsgevaar. Tijdens de lente, van maart tot mei, bedraagt de richtwaarde 250 millimeter. In 2007 werd slechts 222 millimeter gemeten, wat eerder wijst op droogte dan op overstroming. In de zomer, van juni tot augustus, ligt de grens op 260 millimeter. In 2023 werd 270 millimeter geregistreerd, wat duidt op een licht verhoogd risico. Tot slot geldt in de herfst, van september tot november, een richtwaarde van 280 millimeter. Met een gemeten hoeveelheid van 305 millimeter in 2023 was er duidelijk sprake van overstromingsgevaar. 
-- **Grafieken**: Gerealiseerd met Chart.js.
+# Installatie
 
-## Installatie
-
-Geen installatie nodig. Open de gewenste HTML-pagina in je browser. Voor lokale API-calls kan een live server handig zijn.
-
+Geen installatie nodig. Open `index.html` of een andere pagina lokaal in de browser. Voor API-functionaliteit is een live server aanbevolen.
