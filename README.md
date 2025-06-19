@@ -1,96 +1,119 @@
 # Weerdata Applicatie
 
-Deze applicatie is een weerapplicatie, bedoeld voor de techniekers van Aquafin die dagelijks buiten werken. Omdat weersomstandigheden zoals droogte of overstromingen een grote invloed hebben op hun veiligheid en de werkplanning gepland door planners van Aquafin, biedt deze tool hen actuele neerslagvoorspellingen en grafieken om beter te begrijpen hoe het weer zal veranderen over de dag, week of maand. Via adviespagina’s krijgen ze tips over welk materiaal ze het best gebruiken bij extreme weersituaties. Deze inzichten zijn gebaseerd op gesprekken met technieker Gwen Temperman, die concrete noden en risico’s uit de praktijk aanhaalde.
+Deze applicatie is een weerapplicatie die veiligheid en werkplanning ondersteunt voor de techniekers van Aquafin. Omdat weersomstandigheden zoals droogte of overstromingen een directe impact hebben op hun werk, biedt deze tool uurlijkse neerslagvoorspellingen, visuele grafieken en gerichte adviezen. De applicatie speelt in op reële noden die via gesprekken met technieker Gwen Temperman werden blootgelegd.
 
-# Design Thinking
+## Design Thinking
 
-**Probleem:** Techniekers van Aquafin werken dagelijks buiten en worden geconfronteerd met risico’s bij droogte of overstromingen. Er was geen eenvoudige tool om weersomstandigheden te raadplegen en werkrisico’s per regio in te schatten.
-**Oplossing:** We ontwikkelden een webapplicatie die weerdata visualiseert en tips geeft over hoe techniekers hun werk moeten aanpassen in functie van het weer. Deze bevat een locatiekiezer, uurlijkse neerslagvoorspelling en aparte adviespagina’s.
+**Probleem:** Techniekers moeten hun werk afstemmen op het weer, maar beschikten niet over een praktische tool die weersinformatie combineert met veiligheidsadvies.  
+**Oplossing:** Een webapplicatie die actuele neerslaggegevens visualiseert en advies geeft bij droogte of overstroming. Techniekers kunnen snel per locatie bekijken wat het weerbeeld is en hoe ze hun materiaalgebruik daarop moeten afstemmen.
 
-# Analyse & structuur
+## Analyse & structuur
 
 De applicatie bevat:
 
-* Homepagina met welkomstboodschap en knoppen
-* Neerslagoverzicht met grafiek en kaart (Chart.js + eigen JSON/API)
-* Twee aparte adviespagina’s: overstroming & droogte
-* Technische opbouw in HTML, Tailwind, JavaScript en JSON-bestanden
-* Navigatie- en layoutconsistentie via globale CSS
+- Een homepagina met welkomsttekst en knoppen naar functionaliteiten  
+- Neerslagoverzicht per uur en per maand (via grafieken)  
+- Aparte adviespagina’s voor droogte en overstroming  
+- Styling met Tailwind en consistente navigatie  
+- Gebruiksvriendelijke interface ontwikkeld in HTML, CSS en JavaScript  
+- Ingebouwde foutafhandeling en inputvalidatie via JavaScript
 
-# Coderingsmethodes & kwaliteitsbewaking
+## Coderingsmethodes & kwaliteitsbewaking
 
-* Heldere mappenstructuur (`js`, `css`, `data`)
-* Elke feature is afzonderlijk getest (o.a. provincieknoppen, locatiefunctie)
-* Code is gestructureerd met functies, foutafhandeling en inputcontrole
+- Duidelijke mapstructuur (`/html`, `/css`, `/js`, `/img`)
+- JavaScript-functies per feature opgebouwd (grafiek laden, locatie selecteren, waarschuwing tonen)
+- Validatie van invoer en foutmeldingen in console
+- Consistente opbouw en layout via Tailwind CSS
+- Responsief design getest op desktop en mobiel
 
-# Planning
+## Database en Git
 
-* Eerste week: analyse en mockup in Figma
-* Tweede week: feedback van Gwen en aanpassing – Homepagina, API, maandoverzicht, weekoverzicht en adviespagina's
-* Derde week: Styling & grafieken toegevoegd. Dubbelcheck en testing
+- Geen relationele database nodig: de applicatie werkt met statische JSON-bestanden en externe API
+- Ontwikkeling via Git en GitHub, met commits per feature
+- Opdeling in aparte bestanden en mappen per componenttype
 
-# Uitgewerkte analyse
+## Inhoudsopgave
 
-De weerapplicatie bestaat uit statische en dynamische componenten:
+- [Technologieën](#technologieën)  
+- [Functionaliteiten](#functionaliteiten)  
+- [Gebruik](#gebruik)  
+- [Bestandenstructuur](#bestandenstructuur)  
+- [Testen](#testen)  
+- [Projectplanning](#projectplanning)  
+- [Team en werkverdeling](#team-en-werkverdeling)  
+- [Bronnen en digitale hulpmiddelen](#bronnen-en-digitale-hulpmiddelen)  
+- [Contributie](#contributie)  
+- [Licentie](#licentie)
 
-* Homepagina met navigatie en toelichting
-* Pagina met uurlijkse neerslaggrafiek, op basis van een eigen JSON API
-* Twee adviespagina’s met veiligheidsrichtlijnen: droogte en overstroming
-* Interactieve dropdowns en locatieknoppen in JavaScript
-* Styling via Tailwind en responsief gedrag getest
+## Technologieën
 
-# Design thinking toegepast
+### Frontend
 
-* Werknemers van Aquafin hebben praktische info nodig om zich voor te bereiden op het weer
-* De applicatie stelt aangepaste adviezen voor per weersituatie
-* Locatie en provincie worden automatisch of manueel geselecteerd
+- HTML5  
+- Tailwind CSS  
+- JavaScript ES6  
+- Chart.js (voor visualisatie)  
+- JSON (voor dataopslag & testdata)
 
-# Volgen van projectplan
+### API
 
-* Alle onderdelen werden gerealiseerd binnen de geplande weken (zie planning hierboven)
-* Elke component werd afzonderlijk getest en opgebouwd: dataweergave, navigatie, advies
+- Open-Meteo (voor externe weerdata)
 
-# Git & versiebeheer
+## Functionaliteiten
 
-* Ontwikkeling gebeurde via branches, regelmatig gecommit
-* Opgeslagen in GitHub met hoofdmap en duidelijke structuur
+### Weergave & Advies
 
-# Functionaliteiten
+- Neerslagvoorspelling per uur, dag en maand  
+- Dynamische grafieken met waarschuwingsdrempels  
+- Automatische en manuele locatiekeuze  
+- Veiligheidsadvies bij droogte of overstroming
 
-* Overzicht per dag en maand
-* Overstromings- en droogtewaarschuwingen
-* Interactieve grafieken
-* Safety tips per weersituatie
+### Navigatie & Interface
 
-# Gebruik
+- Responsieve layout  
+- Visueel onderscheid tussen adviespagina’s  
+- Snelle toegang tot maandoverzicht en terugknoppen
 
-1. Start de applicatie door `index.html` te openen in de browser
-2. Kies een provincie of gebruik je locatie
-3. Bekijk waarschuwingen bij extreme waarden
-4. Navigeer naar "maand overzicht" of specifieke tips bij waarschuwingen
+### Validatie & Foutafhandeling
 
-# Bestandenstructuur
+- Detectie van ongeldige input  
+- Waarschuwingen bij lege selectie  
+- Console logging voor debugging
 
-* `HTML/`: bevat de pagina's (index, 7dagen, helemaand, droogte, overstroming)
-* `CSS/`: stijlen voor de applicatie
-* `Js/`: JavaScript voor logica en API-koppeling
-* `Img/`: afbeeldingen gebruikt in de weekweergave
+## Gebruik
 
-# Bronnen en digitale hulpmiddelen
+1. Download of clone de repo  
+2. Open `index.html` lokaal in je browser  
+3. Kies je provincie of activeer je locatie  
+4. Navigeer naar adviespagina’s of bekijk de maandgrafiek
 
-- **Blackbox AI Chat**: [Blackbox Chat 1](https://www.blackbox.ai/chat/RQ978ys) .
-- **Blackbox AI Chat**: [Blackbox Chat 2](https://www.blackbox.ai/chat/3cOo1Av) .
-   **Afbeelding Aquafin**:(https://images.app.goo.gl/dLyuzwY6vUmjrNQK9)
-  **Dynamische grafiek**:(https://github.com/chartjs/Chart.js)
-  -**API**:(https://open-meteo.com/)
-  - **CHATGPT**:(Gebruik bij debuggen van code)
+## Bestandenstructuur
 
-# Technische details
+/html/ # index.html, helemaand.html, droogte.html, overstroming.html
+/css/ # global.css, detail.css
+/js/ # script.js, chart.js, api.js
+/img/ # illustraties en iconen
+/data/ # testdata in JSON (optioneel)
 
-* Weerdata via Open-Meteo API
-* Risicodrempels per seizoen (zie README)
-* Grafieken via Chart.js
 
-# Installatie
+## Testen
 
-Geen installatie nodig. Open `index.html` of een andere pagina lokaal in de browser. Voor API-functionaliteit is een live server aanbevolen.
+- Locatiefunctie getest met manuele en automatische input  
+- Dropdowns en knoppenvalidering  
+- Waarschuwingen tonen bij overschrijding van limieten  
+- Grafiekweergave correct per uur en per dag  
+- Navigatie getest op mobiel en desktop
+
+
+## Bronnen en digitale hulpmiddelen
+
+- [Chart.js](https://www.chartjs.org/) – interactieve grafieken  
+- [Open-Meteo](https://open-meteo.com/) – weerdata API  
+- [ChatGPT](https://chat.openai.com/) – validatie, foutoplossing  en structuur readme.
+- [Blackbox Chat](https://www.blackbox.ai/chat/RQ978ys) – debuggingondersteuning  
+- [Aquafin illustratie](https://images.app.goo.gl/dLyuzwY6vUmjrNQK9)  
+
+## Mappenstructuur
+![image](https://github.com/user-attachments/assets/52657718-db22-4170-b6bb-c834f1907c1f)
+
+
