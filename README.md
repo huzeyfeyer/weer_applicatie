@@ -116,4 +116,25 @@ De applicatie bevat:
 ## Mappenstructuur
 ![image](https://github.com/user-attachments/assets/52657718-db22-4170-b6bb-c834f1907c1f)
 
+## Afbeelding weerapplicatie
+Homepage:
+![image](https://github.com/user-attachments/assets/9369fe14-0644-454c-8b4f-843d625c18f9)
+![image](https://github.com/user-attachments/assets/5f286df8-8cac-46be-9c24-baef5a8e715b)
+
+Weekoverzicht:
+![image](https://github.com/user-attachments/assets/e6b8e867-ee32-43bf-91f0-eca8342aa92b)
+
+Maandoverzicht: 
+![image](https://github.com/user-attachments/assets/325c6e7a-ab4b-44f0-9e0d-6a00c0f9806b)
+![image](https://github.com/user-attachments/assets/be23fcf0-42b0-4902-a72f-8ca09420ddb3)
+
+Adviespagina's: 
+Droogte:![image](https://github.com/user-attachments/assets/95d762a8-2175-460d-bbbc-118fa6316420)
+Overstroming: ![image](https://github.com/user-attachments/assets/3f779470-07fd-4e58-89cc-44e270993196)
+
+
+
+
+
+
 
