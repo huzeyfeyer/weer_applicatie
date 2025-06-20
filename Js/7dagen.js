@@ -116,7 +116,7 @@ locatieBtn?.addEventListener('click', () => {
   }
 });
 
-// Bij laden standaard weer voor Brussel
+// Bij laden standaard weer voor locatie
 window.addEventListener('load', () => {
   locatieBtn?.click(); // Gebruik mijn locatie automatisch bij laden
 });

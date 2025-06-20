@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         locatieNaam.textContent = `📍 Voorspelling voor ${provincie}`;
         haalWeerDataOpCoord(coords.lat, coords.lon);
     }
-
+// Weerdata wordt hier opgehaald
     async function haalWeerDataOpCoord(lat, lon) {
         const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&forecast_days=16&timezone=Europe/Brussels`;
         try {
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
   
-
+// Inhoud weerdata in Kaartvorm
     function toonVoorspelling(data) {
         let html = `<table class="details-table">`;
         html += `
@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         voorspellingContainer.innerHTML = html;
     }
 
+    //Functie om neerslaggrafiek te tonen
     function toonNeerslagGrafiek(data) {
          if (!ctx) return;
         const labels = data.time.map(d => new Date(d).toLocaleDateString('nl-BE', { day: '2-digit', month: '2-digit' }));

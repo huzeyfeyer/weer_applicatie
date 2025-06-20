@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const ctx = document.getElementById('dagGrafiek').getContext('2d');
-
+//Grafiek van de dag zelf met marges 
     const uren = ["06u", "07u", "08u", "09u", "10u", "11u", "12u", "13u", "14u", "15u"];
     const neerslag = [0.0, 0.2, 0.5, 1.0, 2.3, 4.1, 5.8, 3.2, 2.0, 1.1]; // voorbeelddata
     const overstromingsgrens = Array(uren.length).fill(5.0); // grens bij 5mm/uur
